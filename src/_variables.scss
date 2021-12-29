@@ -1,0 +1,34 @@
+// Colors
+$light: #f7f7f7;
+$cyan: #66d2d6;
+$cyan-dark: #5bbec2;
+$hotpink: #e56997;
+$lilac: #bd97cb;
+$gold: #fbc740;
+$black: #2a2a2a;
+
+// Media queries
+
+@mixin smallDesk {
+  @media screen and (max-width: 1055px) {
+    @content;
+  }
+}
+
+@mixin bigDesk {
+  @media screen and (min-width: 1055px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 280px) {
+    @content;
+  }
+}

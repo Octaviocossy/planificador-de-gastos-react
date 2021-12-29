@@ -1,0 +1,51 @@
+@import '../../variables';
+
+.alert {
+  position: absolute;
+  top: 1.5rem;
+  left: 80%;
+  background-color: $hotpink;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  color: $light;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  @include smallDesk {
+    position: relative;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    filter: none;
+    text-align: center;
+  }
+  @include bigDesk {
+    -webkit-animation-name: alert;
+    animation-name: alert;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    @-webkit-keyframes alert {
+      0% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        visibility: visible;
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+    @keyframes alert {
+      0% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        visibility: visible;
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+  }
+}

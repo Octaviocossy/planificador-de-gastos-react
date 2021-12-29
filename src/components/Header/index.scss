@@ -1,0 +1,13 @@
+@import '../../variables';
+
+header {
+  padding: 3rem 3rem 13.5rem 3rem;
+  text-align: center;
+  background-color: $cyan;
+  @include tablet {
+    padding: 3rem 3rem 15.5rem 3rem;
+  }
+  & h1 {
+    color: $light;
+  }
+}
