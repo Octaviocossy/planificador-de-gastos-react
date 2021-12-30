@@ -6,6 +6,7 @@ const budgetReducer = (state, action) => {
       return {
         ...state,
         initialAmount: action.payload,
+        isValid: true,
       };
     default:
       return state;

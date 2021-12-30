@@ -30,7 +30,7 @@
       @include tablet {
         color: $light;
       }
-      & input {
+      & input[type='number'] {
         margin-top: 0.5rem;
         padding: 0.5rem;
         font-size: 1rem;
@@ -38,7 +38,7 @@
         border: 1px solid $cyan;
         border-radius: 0.5rem;
       }
-      & input:focus {
+      & input[type='number']:focus {
         outline: none;
         border: 1px solid $cyan;
       }

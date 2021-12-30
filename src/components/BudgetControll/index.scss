@@ -1,0 +1,27 @@
+@import '../../variables';
+
+.controller__div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 50rem;
+  margin: auto;
+  position: relative;
+  top: -10rem;
+  border-radius: 0.5rem;
+  background-color: $light;
+  padding: 3rem;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  &--left {
+  }
+  &--right {
+    p {
+      padding: 0.8rem 0;
+      span {
+        color: $cyan-dark;
+        font-weight: 700;
+      }
+    }
+  }
+}

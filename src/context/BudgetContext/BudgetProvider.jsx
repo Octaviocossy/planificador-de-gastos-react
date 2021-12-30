@@ -6,6 +6,7 @@ import Types from '../../types/budgetTypes';
 const BudgetProvider = ({ children }) => {
   const initialState = {
     initialAmount: 0,
+    isValid: true,
   };
   const [state, dispatch] = useReducer(budgetReducer, initialState);
   const addBudget = (amount) => {
@@ -18,6 +19,7 @@ const BudgetProvider = ({ children }) => {
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
+        isValid: state.isValid,
         addBudget,
       }}
     >

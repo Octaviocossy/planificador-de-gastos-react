@@ -1,15 +1,15 @@
 import React from 'react';
 import Header from './components/Header/Header';
-import NewBudget from './components/NewBudget/NewBudget';
 import BudgetProvider from './context/BudgetContext/BudgetProvider';
 import AlertProvider from './context/AlertContext/AlertProvider';
+import MainComponent from './components/MainComponent/MainComponent';
 
 const App = () => (
   <BudgetProvider>
     <AlertProvider>
-      <div className="main">
+      <div>
         <Header />
-        <NewBudget />
+        <MainComponent />
       </div>
     </AlertProvider>
   </BudgetProvider>

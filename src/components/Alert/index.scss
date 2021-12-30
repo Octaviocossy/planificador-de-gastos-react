@@ -18,7 +18,7 @@
     filter: none;
     text-align: center;
   }
-  @include bigDesk {
+  @include onlyDesk {
     -webkit-animation-name: alert;
     animation-name: alert;
     -webkit-animation-duration: 1s;
