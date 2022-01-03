@@ -13,9 +13,16 @@
   font-size: 1.1rem;
   filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
     drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  @include tablet {
+    filter: none;
+    border-radius: 0;
+    grid-template-columns: 1fr;
+    top: -12rem;
+  }
   &--left {
   }
   &--right {
+    min-height: 12rem;
     p {
       padding: 0.8rem 0;
       span {
@@ -24,4 +31,12 @@
       }
     }
   }
+}
+
+.controller__seconddiv {
+  width: 3.5rem;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  cursor: pointer;
 }

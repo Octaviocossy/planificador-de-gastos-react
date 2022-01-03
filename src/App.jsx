@@ -7,7 +7,7 @@ import MainComponent from './components/MainComponent/MainComponent';
 const App = () => (
   <BudgetProvider>
     <AlertProvider>
-      <div>
+      <div className="main">
         <Header />
         <MainComponent />
       </div>

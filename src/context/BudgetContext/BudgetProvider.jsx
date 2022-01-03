@@ -6,7 +6,8 @@ import Types from '../../types/budgetTypes';
 const BudgetProvider = ({ children }) => {
   const initialState = {
     initialAmount: 0,
-    isValid: true,
+    isValid: false,
+    modal: false,
   };
   const [state, dispatch] = useReducer(budgetReducer, initialState);
   const addBudget = (amount) => {
@@ -15,12 +16,19 @@ const BudgetProvider = ({ children }) => {
       payload: amount,
     });
   };
+  const handleModal = () => {
+    dispatch({
+      type: Types.HANDLE_MODAL,
+    });
+  };
   return (
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
         isValid: state.isValid,
+        modal: state.modal,
         addBudget,
+        handleModal,
       }}
     >
       {children}

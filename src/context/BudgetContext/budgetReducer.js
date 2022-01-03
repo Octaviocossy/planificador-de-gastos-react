@@ -8,6 +8,11 @@ const budgetReducer = (state, action) => {
         initialAmount: action.payload,
         isValid: true,
       };
+    case Types.HANDLE_MODAL:
+      return {
+        ...state,
+        modal: !state.modal,
+      };
     default:
       return state;
   }

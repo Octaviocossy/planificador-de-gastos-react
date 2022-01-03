@@ -24,7 +24,12 @@ const NewBudget = () => {
       <div className="form__main--div">
         <label htmlFor="budget">
           Definir Presupuesto
-          <input type="number" id="budget" onChange={handleChange} />
+          <input
+            type="number"
+            id="budget"
+            onChange={handleChange}
+            placeholder="Ej. 200"
+          />
         </label>
       </div>
       <input type="submit" value="Añadir" className="form__main--submit" />
