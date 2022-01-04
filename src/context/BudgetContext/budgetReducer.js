@@ -13,6 +13,11 @@ const budgetReducer = (state, action) => {
         ...state,
         modal: !state.modal,
       };
+    case Types.ADD_EXPENSES:
+      return {
+        ...state,
+        expensesList: [...state.expensesList, action.payload],
+      };
     default:
       return state;
   }

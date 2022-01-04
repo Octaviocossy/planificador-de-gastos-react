@@ -7,6 +7,29 @@ $lilac: #bd97cb;
 $gold: #fbc740;
 $black: #2a2a2a;
 
+// alertTypes
+
+@mixin alert($color) {
+  z-index: 9999;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: $color;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+  color: $light;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  @include smallDesk {
+    position: relative;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    filter: none;
+    text-align: center;
+  }
+}
+
 // Media queries
 
 @mixin smallDesk {

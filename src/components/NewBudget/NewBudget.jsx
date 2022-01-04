@@ -6,7 +6,7 @@ import './index.scss';
 const NewBudget = () => {
   const [amount, setAmount] = useState(0);
   const { addBudget } = useContext(BudgetContext);
-  const { showAlert, hideAlert } = useContext(AlertContext);
+  const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const handleChange = (e) => {
     setAmount(Number(e.target.value));
   };
@@ -14,9 +14,13 @@ const NewBudget = () => {
     e.preventDefault();
     if (amount <= 0) {
       showAlert('Presupuesto no válido', 'red');
+      changeAnimation(true);
       return;
     }
-    hideAlert();
+    changeAnimation(false);
+    setTimeout(() => {
+      hideAlert();
+    }, 1000);
     addBudget(amount);
   };
   return (

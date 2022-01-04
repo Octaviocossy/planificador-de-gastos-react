@@ -3,9 +3,9 @@ import AlertContext from '../../context/AlertContext/alertContext';
 import './index.scss';
 
 const Alert = () => {
-  const { alert } = useContext(AlertContext);
+  const { alert, animation } = useContext(AlertContext);
   return (
-    <div className="alert">
+    <div className={`${alert.type} ${animation ? 'alertDown' : 'alertUp'}`}>
       <p className="alert__p">{alert.msg}</p>
     </div>
   );
