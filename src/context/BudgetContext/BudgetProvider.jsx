@@ -6,7 +6,22 @@ import Types from '../../types/budgetTypes';
 const BudgetProvider = ({ children }) => {
   const initialState = {
     initialAmount: 1000,
-    expensesList: [],
+    expensesList: [
+      {
+        expense_name: 'Pagar Netflix',
+        quantity: 199,
+        expense_filter: 'gastos',
+        id: 'gcsvgk0wvaky1ie30j',
+        date: '05 de enero de 2022',
+      },
+      {
+        expense_name: 'Test',
+        quantity: 399,
+        expense_filter: 'comida',
+        id: 'gcsagk0wvaky1ie30j',
+        date: '05 de enero de 2022',
+      },
+    ],
     isValid: true,
     modal: false,
   };
@@ -29,6 +44,7 @@ const BudgetProvider = ({ children }) => {
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
+        expensesList: state.expensesList,
         isValid: state.isValid,
         modal: state.modal,
         addExpense,

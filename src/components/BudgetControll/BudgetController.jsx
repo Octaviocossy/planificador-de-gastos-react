@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
-import { quantityFormatting } from '../../Helper';
+import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
+import ExpensesList from '../ExpensesList/ExpensesList';
 import Modal from '../Modal/Modal';
 import './index.scss';
 
@@ -15,20 +16,24 @@ const BudgetController = () => {
         </div>
         <div className="controller__div--right">
           <p>
-            <span>Presupuesto:</span> {quantityFormatting(initialAmount)}
+            <span>Presupuesto:</span> {quantityFormatter(initialAmount)}
           </p>
           <p>
-            <span>Disponible:</span> {quantityFormatting(initialAmount)}
+            <span>Disponible:</span> {quantityFormatter(initialAmount)}
           </p>
           <p>
-            <span>Gastado:</span> {quantityFormatting(initialAmount)}
+            <span>Gastado:</span> {quantityFormatter(initialAmount)}
           </p>
         </div>
       </div>
+      <div className="controller__expensesDiv">
+        <h2 className="controller__expensesDiv--h2">Gastos</h2>
+        <ExpensesList />
+      </div>
       {!modal && (
-        <div className="controller__seconddiv">
+        <div className="controller__modalDiv">
           <img
-            className="controller__seconddiv--img"
+            className="controller__modalDiv--img"
             src={addSpendingIcon}
             alt="new spending"
             onClickCapture={handleModal}

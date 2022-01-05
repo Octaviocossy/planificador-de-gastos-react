@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
 import AlertContext from '../../context/AlertContext/alertContext';
 import button from '../../img/close.png';
-import { randomID } from '../../Helper';
+import { randomID, dateGenerator } from '../../Helper';
 import './index.scss';
 
 const Modal = () => {
@@ -35,6 +35,7 @@ const Modal = () => {
       hideAlert();
     }, 1000);
     expense.id = randomID();
+    expense.date = dateGenerator();
     expense.quantity = Number(expense.quantity);
     addExpense(expense);
     handleModal();
