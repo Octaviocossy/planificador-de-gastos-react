@@ -5,25 +5,21 @@ import Types from '../../types/budgetTypes';
 
 const BudgetProvider = ({ children }) => {
   const initialState = {
-    initialAmount: 1000,
+    initialAmount: 29000,
     expensesList: [
       {
-        expense_name: 'Pagar Netflix',
-        quantity: 199,
-        expense_filter: 'gastos',
-        id: 'gcsvgk0wvaky1ie30j',
-        date: '05 de enero de 2022',
-      },
-      {
-        expense_name: 'Test',
-        quantity: 399,
-        expense_filter: 'comida',
-        id: 'gcsagk0wvaky1ie30j',
-        date: '05 de enero de 2022',
+        expense_name: 'Crypto',
+        quantity: 19500,
+        expense_filter: 'ahorro',
+        id: 'fzccqvwz8otky4efhza',
+        date: '07 de enero de 2022',
       },
     ],
+    totalSpensed: 0,
+    available: 0,
     isValid: true,
-    modal: false,
+    modalForm: false,
+    modalOptions: false,
   };
   const [state, dispatch] = useReducer(budgetReducer, initialState);
   const addBudget = (amount) => {
@@ -32,24 +28,41 @@ const BudgetProvider = ({ children }) => {
       payload: amount,
     });
   };
-  const handleModal = () => {
+  const handleModalForm = () => {
     dispatch({
-      type: Types.HANDLE_MODAL,
+      type: Types.HANDLE_MODAL_FORM,
+    });
+  };
+  const handleModalOptions = () => {
+    dispatch({
+      type: Types.HANDLE_MODAL_OPTIONS,
     });
   };
   const addExpense = (expense) => {
     dispatch({ type: Types.ADD_EXPENSES, payload: expense });
+  };
+  const addSpensed = () => {
+    dispatch({ type: Types.TOTAL_SPENSED });
+  };
+  const amountAvailable = () => {
+    dispatch({ type: Types.AMOUNT_AVAILABLE });
   };
   return (
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
         expensesList: state.expensesList,
+        totalSpensed: state.totalSpensed,
+        modalForm: state.modalForm,
+        available: state.available,
         isValid: state.isValid,
-        modal: state.modal,
+        modalOptions: state.modalOptions,
         addExpense,
         addBudget,
-        handleModal,
+        handleModalForm,
+        handleModalOptions,
+        addSpensed,
+        amountAvailable,
       }}
     >
       {children}

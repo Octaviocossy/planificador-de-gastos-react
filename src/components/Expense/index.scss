@@ -1,6 +1,7 @@
 @import '../../variables';
 
 .expense__div {
+  cursor: pointer;
   background-color: $light;
   display: flex;
   border-radius: 0.5rem;

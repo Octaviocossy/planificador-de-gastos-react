@@ -8,15 +8,33 @@ const budgetReducer = (state, action) => {
         initialAmount: action.payload,
         isValid: true,
       };
-    case Types.HANDLE_MODAL:
+    case Types.HANDLE_MODAL_FORM:
       return {
         ...state,
-        modal: !state.modal,
+        modalForm: !state.modalForm,
+      };
+    case Types.HANDLE_MODAL_OPTIONS:
+      return {
+        ...state,
+        modalOptions: !state.modalOptions,
       };
     case Types.ADD_EXPENSES:
       return {
         ...state,
         expensesList: [...state.expensesList, action.payload],
+      };
+    case Types.TOTAL_SPENSED:
+      return {
+        ...state,
+        totalSpensed: state.expensesList.reduce(
+          (total, spense) => spense.quantity + total,
+          0
+        ),
+      };
+    case Types.AMOUNT_AVAILABLE:
+      return {
+        ...state,
+        available: state.initialAmount - state.totalSpensed,
       };
     default:
       return state;

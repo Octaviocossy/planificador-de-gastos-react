@@ -1,13 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
 import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
 import ExpensesList from '../ExpensesList/ExpensesList';
-import Modal from '../Modal/Modal';
+import ModalForm from '../ModalForm/ModalForm';
 import './index.scss';
 
 const BudgetController = () => {
-  const { initialAmount, handleModal, modal } = useContext(BudgetContext);
+  const {
+    initialAmount,
+    handleModalForm,
+    modalForm,
+    totalSpensed,
+    expensesList,
+    addSpensed,
+    amountAvailable,
+    available,
+    modalOptions,
+  } = useContext(BudgetContext);
+  useEffect(() => {
+    addSpensed();
+    amountAvailable();
+  }, [expensesList]);
   return (
     <>
       <div className="controller__div">
@@ -19,10 +33,10 @@ const BudgetController = () => {
             <span>Presupuesto:</span> {quantityFormatter(initialAmount)}
           </p>
           <p>
-            <span>Disponible:</span> {quantityFormatter(initialAmount)}
+            <span>Disponible:</span> {quantityFormatter(available)}
           </p>
           <p>
-            <span>Gastado:</span> {quantityFormatter(initialAmount)}
+            <span>Gastado:</span> {quantityFormatter(totalSpensed)}
           </p>
         </div>
       </div>
@@ -30,17 +44,17 @@ const BudgetController = () => {
         <h2 className="controller__expensesDiv--h2">Gastos</h2>
         <ExpensesList />
       </div>
-      {!modal && (
+      {!modalForm && !modalOptions ? (
         <div className="controller__modalDiv">
           <img
             className="controller__modalDiv--img"
             src={addSpendingIcon}
             alt="new spending"
-            onClickCapture={handleModal}
+            onClickCapture={handleModalForm}
           />
         </div>
-      )}
-      {modal && <Modal />}
+      ) : null}
+      {modalForm && <ModalForm />}
     </>
   );
 };

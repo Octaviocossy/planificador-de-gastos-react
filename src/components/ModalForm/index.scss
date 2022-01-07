@@ -1,6 +1,6 @@
 @import '../../variables';
 
-.modal {
+.modalForm {
   background-color: rgba(102, 210, 214, 0.3);
   position: fixed;
   top: 50%;
@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
   height: 100%;
   width: 100%;
-  .modal__div {
+  .modalForm__div {
     &--h2 {
       color: $black;
       text-align: center;

@@ -30,6 +30,18 @@ $black: #5a616d;
   }
 }
 
+@mixin btn($color, $bg) {
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  padding: 1rem 3.5rem;
+  margin: 2rem 0.5rem 0 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: $color;
+  background-color: $bg;
+}
+
 // Media queries
 
 @mixin smallDesk {

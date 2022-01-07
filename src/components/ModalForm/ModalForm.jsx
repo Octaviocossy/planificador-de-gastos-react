@@ -5,8 +5,8 @@ import button from '../../img/close.png';
 import { randomID, dateGenerator } from '../../Helper';
 import './index.scss';
 
-const Modal = () => {
-  const { handleModal, addExpense } = useContext(BudgetContext);
+const ModalForm = () => {
+  const { handleModalForm, addExpense } = useContext(BudgetContext);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const [expense, setExpense] = useState({
     expense_name: '',
@@ -38,16 +38,16 @@ const Modal = () => {
     expense.date = dateGenerator();
     expense.quantity = Number(expense.quantity);
     addExpense(expense);
-    handleModal();
+    handleModalForm();
   };
   return (
-    <div className="modal">
-      <div className="modal__div">
-        <div className="modal__div--btn">
-          <img src={button} alt="close btn" onClickCapture={handleModal} />
+    <div className="modalForm">
+      <div className="modalForm__div">
+        <div className="modalForm__div--btn">
+          <img src={button} alt="close btn" onClickCapture={handleModalForm} />
         </div>
-        <h2 className="modal__div--h2">Nuevo Gasto</h2>
-        <form className="modal__form" onSubmit={handleSubmit}>
+        <h2 className="modalForm__div--h2">Nuevo Gasto</h2>
+        <form className="modalForm__form" onSubmit={handleSubmit}>
           <label htmlFor="expense_name">
             Nombre Gasto
             <input
@@ -90,11 +90,11 @@ const Modal = () => {
               <option value="suscripciones">Suscripciones</option>
             </select>
           </label>
-          <input type="submit" value="Añadir" className="modal__form--submit" />
+          <input type="submit" value="Añadir" className="modalForm__form--submit" />
         </form>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default ModalForm;
