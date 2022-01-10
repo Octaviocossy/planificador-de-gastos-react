@@ -8,6 +8,7 @@ import './index.scss';
 const ModalForm = () => {
   const { handleModalForm, addExpense } = useContext(BudgetContext);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
+  const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
     expense_name: '',
     quantity: 0,
@@ -40,11 +41,19 @@ const ModalForm = () => {
     addExpense(expense);
     handleModalForm();
   };
+  const closeModal = () => {
+    changeAnimation(false);
+    setAnimation(false);
+    setTimeout(() => {
+      hideAlert();
+      handleModalForm();
+    }, 1000);
+  };
   return (
-    <div className="modalForm">
+    <div className={`modalForm ${animation ? 'animationIn' : 'animationOut'}`}>
       <div className="modalForm__div">
         <div className="modalForm__div--btn">
-          <img src={button} alt="close btn" onClickCapture={handleModalForm} />
+          <img src={button} alt="close btn" onClickCapture={closeModal} />
         </div>
         <h2 className="modalForm__div--h2">Nuevo Gasto</h2>
         <form className="modalForm__form" onSubmit={handleSubmit}>
@@ -90,7 +99,11 @@ const ModalForm = () => {
               <option value="suscripciones">Suscripciones</option>
             </select>
           </label>
-          <input type="submit" value="Añadir" className="modalForm__form--submit" />
+          <input
+            type="submit"
+            value="Añadir"
+            className="modalForm__form--submit"
+          />
         </form>
       </div>
     </div>

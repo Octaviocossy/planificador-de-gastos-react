@@ -1,19 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
 import QMark from '../../img/Question_mark.png';
 import './index.scss';
 
 const ModalOptions = () => {
   const { handleModalOptions } = useContext(BudgetContext);
+  const [animation, setAnimation] = useState(true);
+  const closeModal = () => {
+    setAnimation(false);
+    setTimeout(() => {
+      handleModalOptions();
+    }, 1000);
+  };
   return (
-    <div className="modal">
+    <div className={`modal ${animation ? 'animationIn' : 'animationOut'}`}>
       <div className="modal__div">
         <img src={QMark} alt="question_mark_pic" className="modal__div--pic" />
         <div className="modal__div--btns">
-          <button type="button" className="modal__div--btns--edit" onClick={handleModalOptions}>
+          <button
+            type="button"
+            className="modal__div--btns--edit"
+            onClick={closeModal}
+          >
             Editar
           </button>
-          <button type="button" className="modal__div--btns--delete"  onClick={handleModalOptions}>
+          <button
+            type="button"
+            className="modal__div--btns--delete"
+            onClick={handleModalOptions}
+          >
             Borrar
           </button>
         </div>

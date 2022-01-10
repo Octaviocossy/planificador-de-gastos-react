@@ -1,14 +1,16 @@
 @import '../../variables';
 
 .modal {
-  background-color: rgba(102, 210, 214, 0.3);
+  background-color: rgba(183, 183, 183, 0.5);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 100%;
   width: 100%;
-  .modal__div {
+  animation-name: modal;
+  animation-duration: 1s;
+  &__div {
     &--h2 {
       color: $black;
       text-align: center;
@@ -49,9 +51,6 @@
       @keyframes modal__div--pic {
         100% {
           transform: rotate(360deg);
-        }
-        100% {
-          transform: rotate(360deg);
           visibility: visible;
         }
       }
@@ -63,6 +62,32 @@
       &--delete {
         @include btn($light, $hotpink);
       }
+    }
+  }
+}
+
+.animationOut {
+  animation-name: animationOut;
+  animation-duration: 1s;
+  @keyframes animationOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.animationIn {
+  animation-name: animationIn;
+  animation-duration: 1s;
+  @keyframes animationIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }
