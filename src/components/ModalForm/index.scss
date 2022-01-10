@@ -1,7 +1,7 @@
 @import '../../variables';
 
 .modalForm {
-  background-color: rgba(102, 210, 214, 0.3);
+  background-color: rgba(183, 183, 183, 0.5);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -13,6 +13,7 @@
       color: $black;
       text-align: center;
       margin-bottom: 1rem;
+      margin-top: 2rem;
       font-size: 2rem;
       @include tablet {
         color: $light;
@@ -24,7 +25,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2rem;
-    height: 38rem;
+    height: 42rem;
     width: 30rem;
     background-color: $light;
     border-radius: 0.5rem;
@@ -44,8 +45,8 @@
       }
       position: relative;
       max-width: 2.5rem;
-      top: -2%;
-      right: -92%;
+      top: -1%;
+      right: -90%;
       img {
         width: 2.5rem;
         cursor: pointer;
@@ -98,7 +99,7 @@
 
 .animationOut {
   animation-name: animationOut;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   @keyframes animationOut {
     0% {
       opacity: 1;
@@ -111,7 +112,7 @@
 
 .animationIn {
   animation-name: animationIn;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   @keyframes animationIn {
     0% {
       opacity: 0;

@@ -4,6 +4,7 @@ import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
 import ExpensesList from '../ExpensesList/ExpensesList';
 import ModalForm from '../ModalForm/ModalForm';
+import ModalOptions from '../ModalOptions/ModalOptions';
 import './index.scss';
 
 const BudgetController = () => {
@@ -17,11 +18,16 @@ const BudgetController = () => {
     amountAvailable,
     available,
     modalOptions,
+    deleteEditExpense,
   } = useContext(BudgetContext);
   useEffect(() => {
     addSpensed();
     amountAvailable();
   }, [expensesList]);
+  const handleForm = () => {
+    deleteEditExpense();
+    handleModalForm();
+  };
   return (
     <>
       <div className="controller__div">
@@ -50,11 +56,12 @@ const BudgetController = () => {
             className="controller__modalDiv--img"
             src={addSpendingIcon}
             alt="new spending"
-            onClickCapture={handleModalForm}
+            onClickCapture={handleForm}
           />
         </div>
       ) : null}
       {modalForm && <ModalForm />}
+      {modalOptions && <ModalOptions />}
     </>
   );
 };

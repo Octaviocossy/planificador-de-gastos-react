@@ -46,7 +46,7 @@
     &--pic {
       width: 8rem;
       animation-name: modal__div--pic;
-      animation-duration: 1s;
+      animation-duration: 0.5s;
       position: relative;
       @keyframes modal__div--pic {
         100% {
@@ -68,7 +68,7 @@
 
 .animationOut {
   animation-name: animationOut;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   @keyframes animationOut {
     0% {
       opacity: 1;
@@ -81,7 +81,7 @@
 
 .animationIn {
   animation-name: animationIn;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   @keyframes animationIn {
     0% {
       opacity: 0;

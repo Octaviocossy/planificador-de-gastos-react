@@ -5,11 +5,11 @@ import Types from '../../types/budgetTypes';
 
 const BudgetProvider = ({ children }) => {
   const initialState = {
-    initialAmount: 29000,
+    initialAmount: 10000,
     expensesList: [
       {
         expense_name: 'Crypto',
-        quantity: 19500,
+        quantity: 2800,
         expense_filter: 'ahorro',
         id: 'fzccqvwz8otky4efhza',
         date: '07 de enero de 2022',
@@ -20,6 +20,7 @@ const BudgetProvider = ({ children }) => {
     isValid: true,
     modalForm: false,
     modalOptions: false,
+    editExpense: null,
   };
   const [state, dispatch] = useReducer(budgetReducer, initialState);
   const addBudget = (amount) => {
@@ -47,9 +48,19 @@ const BudgetProvider = ({ children }) => {
   const amountAvailable = () => {
     dispatch({ type: Types.AMOUNT_AVAILABLE });
   };
+  const editExpense = (expense) => {
+    dispatch({ type: Types.EDIT_EXPENSE, payload: expense });
+  };
+  const deleteEditExpense = () => {
+    dispatch({ type: Types.DELETE_EDIT_EXPENSE });
+  };
+  const updateExpense = (expense) => {
+    dispatch({ type: Types.UPDATE_EXPENSE, payload: expense });
+  };
   return (
     <BudgetContext.Provider
       value={{
+        editExpenseState: state.editExpense,
         initialAmount: state.initialAmount,
         expensesList: state.expensesList,
         totalSpensed: state.totalSpensed,
@@ -57,12 +68,15 @@ const BudgetProvider = ({ children }) => {
         available: state.available,
         modalForm: state.modalForm,
         isValid: state.isValid,
+        updateExpense,
+        deleteEditExpense,
         addExpense,
         addBudget,
         handleModalForm,
         handleModalOptions,
         addSpensed,
         amountAvailable,
+        editExpense,
       }}
     >
       {children}

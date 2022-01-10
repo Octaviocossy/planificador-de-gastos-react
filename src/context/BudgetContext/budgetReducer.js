@@ -36,6 +36,23 @@ const budgetReducer = (state, action) => {
         ...state,
         available: state.initialAmount - state.totalSpensed,
       };
+    case Types.EDIT_EXPENSE:
+      return {
+        ...state,
+        editExpense: action.payload,
+      };
+    case Types.DELETE_EDIT_EXPENSE:
+      return {
+        ...state,
+        editExpense: null,
+      };
+    case Types.UPDATE_EXPENSE:
+      return {
+        ...state,
+        expensesList: state.expensesList.map((expense) =>
+          expense.id === action.payload.id ? action.payload : expense
+        ),
+      };
     default:
       return state;
   }

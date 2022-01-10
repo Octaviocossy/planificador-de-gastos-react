@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
 import AlertContext from '../../context/AlertContext/alertContext';
 import button from '../../img/close.png';
@@ -6,7 +6,13 @@ import { randomID, dateGenerator } from '../../Helper';
 import './index.scss';
 
 const ModalForm = () => {
-  const { handleModalForm, addExpense } = useContext(BudgetContext);
+  const {
+    handleModalForm,
+    addExpense,
+    editExpenseState,
+    updateExpense,
+    deleteEditExpense,
+  } = useContext(BudgetContext);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
@@ -14,6 +20,11 @@ const ModalForm = () => {
     quantity: 0,
     expense_filter: '',
   });
+  useEffect(() => {
+    if (editExpenseState !== null) {
+      setExpense(editExpenseState);
+    }
+  }, []);
   const handleChange = (e) => {
     setExpense({
       ...expense,
@@ -22,24 +33,35 @@ const ModalForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      [expense.expense_name, expense.quantity, expense.expense_filter].includes(
-        ''
-      )
-    ) {
-      showAlert('Todos los campos son obligatorios', 'red');
-      changeAnimation(true);
-      return;
+    if (expense.id) {
+      expense.quantity = Number(expense.quantity);
+      updateExpense(expense);
+      setAnimation(false);
+      deleteEditExpense();
+      handleModalForm();
+    } else {
+      if (
+        [
+          expense.expense_name,
+          expense.quantity,
+          expense.expense_filter,
+        ].includes('')
+      ) {
+        showAlert('Todos los campos son obligatorios', 'red');
+        changeAnimation(true);
+        return;
+      }
+      changeAnimation(false);
+      setAnimation(false);
+      setTimeout(() => {
+        hideAlert();
+        handleModalForm();
+      }, 500);
+      expense.id = randomID();
+      expense.date = dateGenerator();
+      expense.quantity = Number(expense.quantity);
+      addExpense(expense);
     }
-    changeAnimation(false);
-    setTimeout(() => {
-      hideAlert();
-    }, 1000);
-    expense.id = randomID();
-    expense.date = dateGenerator();
-    expense.quantity = Number(expense.quantity);
-    addExpense(expense);
-    handleModalForm();
   };
   const closeModal = () => {
     changeAnimation(false);
@@ -47,7 +69,7 @@ const ModalForm = () => {
     setTimeout(() => {
       hideAlert();
       handleModalForm();
-    }, 1000);
+    }, 500);
   };
   return (
     <div className={`modalForm ${animation ? 'animationIn' : 'animationOut'}`}>
@@ -55,7 +77,9 @@ const ModalForm = () => {
         <div className="modalForm__div--btn">
           <img src={button} alt="close btn" onClickCapture={closeModal} />
         </div>
-        <h2 className="modalForm__div--h2">Nuevo Gasto</h2>
+        <h2 className="modalForm__div--h2">
+          {editExpenseState !== null ? 'Editar Gasto' : 'Nuevo Gasto'}
+        </h2>
         <form className="modalForm__form" onSubmit={handleSubmit}>
           <label htmlFor="expense_name">
             Nombre Gasto
@@ -67,6 +91,7 @@ const ModalForm = () => {
               id="expense_name"
               autoComplete="off"
               onChange={handleChange}
+              value={expense.expense_name}
             />
           </label>
           <label htmlFor="quantity">
@@ -79,6 +104,7 @@ const ModalForm = () => {
               id="quantity"
               autoComplete="off"
               onChange={handleChange}
+              value={expense.quantity}
             />
           </label>
           <label htmlFor="expense_filter">
@@ -88,6 +114,7 @@ const ModalForm = () => {
               id="expense_filter"
               name="expense_filter"
               onChange={handleChange}
+              value={expense.expense_filter}
             >
               <option value=""> --- </option>
               <option value="ahorro">Ahorro</option>
@@ -101,7 +128,7 @@ const ModalForm = () => {
           </label>
           <input
             type="submit"
-            value="Añadir"
+            value={editExpenseState !== null ? 'Editar' : 'Añadir'}
             className="modalForm__form--submit"
           />
         </form>
