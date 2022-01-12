@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
+import ExpenseContext from '../../context/ExpenseContext/expenseContext';
+import ModalContext from '../../context/ModalContext/modalContext';
 import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
 import ExpensesList from '../ExpensesList/ExpensesList';
@@ -9,20 +11,18 @@ import './index.scss';
 
 const BudgetController = () => {
   const {
-    initialAmount,
-    handleModalForm,
-    modalForm,
     totalSpensed,
     expensesList,
     addSpensed,
     amountAvailable,
     available,
-    modalOptions,
     deleteEditExpense,
-  } = useContext(BudgetContext);
+  } = useContext(ExpenseContext);
+  const { initialAmount } = useContext(BudgetContext);
+  const { handleModalForm, modalForm, modalOptions } = useContext(ModalContext);
   useEffect(() => {
     addSpensed();
-    amountAvailable();
+    amountAvailable(initialAmount);
   }, [expensesList]);
   const handleForm = () => {
     deleteEditExpense();

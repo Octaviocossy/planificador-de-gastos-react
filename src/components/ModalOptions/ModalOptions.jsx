@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import BudgetContext from '../../context/BudgetContext/budgetContext';
+import ModalContext from '../../context/ModalContext/modalContext';
 import QMark from '../../img/Question_mark.png';
 import './index.scss';
 
 const ModalOptions = () => {
-  const { handleModalOptions, handleModalForm } = useContext(BudgetContext);
+  const { handleModalOptions, handleModalForm } = useContext(ModalContext);
   const [animation, setAnimation] = useState(true);
   const closeModal = () => {
     setAnimation(false);

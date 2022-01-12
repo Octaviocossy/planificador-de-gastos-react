@@ -5,9 +5,10 @@ import comidaIcon from '../../img/icono_comida.svg';
 import gastosIcon from '../../img/icono_gastos.svg';
 import ocioIcon from '../../img/icono_ocio.svg';
 import saludIcon from '../../img/icono_salud.svg';
-import BudgetContext from '../../context/BudgetContext/budgetContext';
 import suscripcionesIcon from '../../img/icono_suscripciones.svg';
 import { quantityFormatter } from '../../Helper';
+import ModalContext from '../../context/ModalContext/modalContext';
+import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import './index.scss';
 
 const iconDictionary = {
@@ -21,7 +22,8 @@ const iconDictionary = {
 };
 
 const Expense = ({ expense }) => {
-  const { handleModalOptions, editExpense } = useContext(BudgetContext);
+  const { handleModalOptions } = useContext(ModalContext);
+  const { editExpense } = useContext(ExpenseContext);
   const handleModal = () => {
     editExpense(expense);
     handleModalOptions();

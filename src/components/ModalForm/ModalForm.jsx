@@ -1,18 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
-import BudgetContext from '../../context/BudgetContext/budgetContext';
+import ModalExpense from '../../context/ModalContext/modalContext';
+import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import AlertContext from '../../context/AlertContext/alertContext';
 import button from '../../img/close.png';
 import { randomID, dateGenerator } from '../../Helper';
 import './index.scss';
 
 const ModalForm = () => {
-  const {
-    handleModalForm,
-    addExpense,
-    editExpenseState,
-    updateExpense,
-    deleteEditExpense,
-  } = useContext(BudgetContext);
+  const { addExpense, editExpenseState, updateExpense, deleteEditExpense } =
+    useContext(ExpenseContext);
+  const { handleModalForm } = useContext(ModalExpense);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
@@ -31,14 +28,21 @@ const ModalForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const closeModal = () => {
+    changeAnimation(false);
+    setAnimation(false);
+    setTimeout(() => {
+      hideAlert();
+      handleModalForm();
+    }, 500);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (expense.id) {
       expense.quantity = Number(expense.quantity);
       updateExpense(expense);
-      setAnimation(false);
       deleteEditExpense();
-      handleModalForm();
+      closeModal();
     } else {
       if (
         [
@@ -51,25 +55,12 @@ const ModalForm = () => {
         changeAnimation(true);
         return;
       }
-      changeAnimation(false);
-      setAnimation(false);
-      setTimeout(() => {
-        hideAlert();
-        handleModalForm();
-      }, 500);
+      closeModal();
       expense.id = randomID();
       expense.date = dateGenerator();
       expense.quantity = Number(expense.quantity);
       addExpense(expense);
     }
-  };
-  const closeModal = () => {
-    changeAnimation(false);
-    setAnimation(false);
-    setTimeout(() => {
-      hideAlert();
-      handleModalForm();
-    }, 500);
   };
   return (
     <div className={`modalForm ${animation ? 'animationIn' : 'animationOut'}`}>

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import BudgetContext from '../../context/BudgetContext/budgetContext';
+import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import Expense from '../Expense/Expense';
 
 const ExpensesList = () => {
-  const { expensesList } = useContext(BudgetContext);
+  const { expensesList } = useContext(ExpenseContext);
   return (
     <>
       {expensesList.map((expense) => (
