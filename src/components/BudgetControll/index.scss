@@ -18,11 +18,21 @@
     border-radius: 0;
     grid-template-columns: 1fr;
     top: -12rem;
+    background-color: #f4f4f4;
   }
   &--left {
+    max-width: 13rem;
+    margin: auto;
+    @include tablet {
+      margin-bottom: 3rem;
+    }
   }
   &--right {
-    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    font-size: 1.2rem;
     p {
       padding: 0.8rem 0;
       span {

@@ -5,8 +5,8 @@ import Types from '../../types/budgetTypes';
 
 const BudgetProvider = ({ children }) => {
   const initialState = {
-    initialAmount: 10000,
-    isValid: true,
+    initialAmount: Number(localStorage.getItem('budget')) ?? 0,
+    isValid: false,
   };
   const [state, dispatch] = useReducer(budgetReducer, initialState);
   const addBudget = (amount) => {
@@ -15,11 +15,15 @@ const BudgetProvider = ({ children }) => {
       payload: amount,
     });
   };
+  const initialAmountLS = (amount) => {
+    localStorage.setItem('budget', amount ?? 0);
+  };
   return (
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
         isValid: state.isValid,
+        initialAmountLS,
         addBudget,
       }}
     >

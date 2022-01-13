@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import BudgetContext from '../../context/BudgetContext/budgetContext';
-import ExpenseContext from '../../context/ExpenseContext/expenseContext';
-import ModalContext from '../../context/ModalContext/modalContext';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
+import ExpenseContext from '../../context/ExpenseContext/expenseContext';
+import BudgetContext from '../../context/BudgetContext/budgetContext';
+import ModalContext from '../../context/ModalContext/modalContext';
+import ModalOptions from '../ModalOptions/ModalOptions';
 import ExpensesList from '../ExpensesList/ExpensesList';
 import ModalForm from '../ModalForm/ModalForm';
-import ModalOptions from '../ModalOptions/ModalOptions';
+import 'react-circular-progressbar/dist/styles.css';
 import './index.scss';
 
 const BudgetController = () => {
@@ -17,12 +19,15 @@ const BudgetController = () => {
     amountAvailable,
     available,
     deleteEditExpense,
+    percentageSpensed,
+    percentage,
   } = useContext(ExpenseContext);
   const { initialAmount } = useContext(BudgetContext);
   const { handleModalForm, modalForm, modalOptions } = useContext(ModalContext);
   useEffect(() => {
     addSpensed();
     amountAvailable(initialAmount);
+    percentageSpensed(initialAmount);
   }, [expensesList]);
   const handleForm = () => {
     deleteEditExpense();
@@ -32,7 +37,15 @@ const BudgetController = () => {
     <>
       <div className="controller__div">
         <div className="controller__div--left">
-          <p>grafica</p>
+          <CircularProgressbar
+            styles={buildStyles({
+              pathColor: '#66d2d6',
+              textColor: '#66d2d6',
+              textSize: '9px',
+            })}
+            text={`${percentage}% Gastado`}
+            value={percentage}
+          />
         </div>
         <div className="controller__div--right">
           <p>

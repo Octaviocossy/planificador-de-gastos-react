@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
 import AlertContext from '../../context/AlertContext/alertContext';
 import './index.scss';
 
 const NewBudget = () => {
   const [amount, setAmount] = useState(0);
-  const { addBudget } = useContext(BudgetContext);
+  const { addBudget, initialAmountLS, initialAmount } =
+    useContext(BudgetContext);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const handleChange = (e) => {
     setAmount(Number(e.target.value));
@@ -22,7 +23,11 @@ const NewBudget = () => {
       hideAlert();
     }, 1000);
     addBudget(amount);
+    initialAmountLS(amount);
   };
+  useEffect(() => {
+    if (initialAmount > 0) addBudget(initialAmount);
+  }, []);
   return (
     <form className="form__main" onSubmit={handleSubmit}>
       <div className="form__main--div">

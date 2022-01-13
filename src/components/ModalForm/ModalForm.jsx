@@ -7,8 +7,14 @@ import { randomID, dateGenerator } from '../../Helper';
 import './index.scss';
 
 const ModalForm = () => {
-  const { addExpense, editExpenseState, updateExpense, deleteEditExpense } =
-    useContext(ExpenseContext);
+  const {
+    addExpense,
+    editExpenseState,
+    updateExpense,
+    deleteEditExpense,
+    saveExpenseLS,
+    expensesList,
+  } = useContext(ExpenseContext);
   const { handleModalForm } = useContext(ModalExpense);
   const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
@@ -29,6 +35,7 @@ const ModalForm = () => {
     });
   };
   const closeModal = () => {
+    deleteEditExpense();
     changeAnimation(false);
     setAnimation(false);
     setTimeout(() => {
@@ -62,6 +69,9 @@ const ModalForm = () => {
       addExpense(expense);
     }
   };
+  useEffect(() => {
+    saveExpenseLS();
+  }, [expensesList]);
   return (
     <div className={`modalForm ${animation ? 'animationIn' : 'animationOut'}`}>
       <div className="modalForm__div">

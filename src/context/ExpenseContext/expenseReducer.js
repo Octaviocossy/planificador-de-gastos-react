@@ -37,6 +37,21 @@ const expenseReducer = (state, action) => {
         ...state,
         available: action.payload - state.totalSpensed,
       };
+    case Types.DELETE_EXPENSE:
+      return {
+        ...state,
+        expensesList: state.expensesList.filter(
+          (expense) => expense.id !== state.editExpense.id
+        ),
+      };
+    case Types.PERCENTAGE_SPENSED:
+      return {
+        ...state,
+        percentage: (
+          ((action.payload - state.available) / action.payload) *
+          100
+        ).toFixed(2),
+      };
     default:
       return state;
   }
