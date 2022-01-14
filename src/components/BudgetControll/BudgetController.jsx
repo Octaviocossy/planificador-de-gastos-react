@@ -10,6 +10,7 @@ import ExpensesList from '../ExpensesList/ExpensesList';
 import ModalForm from '../ModalForm/ModalForm';
 import 'react-circular-progressbar/dist/styles.css';
 import './index.scss';
+import Filter from '../Filter/Filter';
 
 const BudgetController = () => {
   const {
@@ -60,6 +61,7 @@ const BudgetController = () => {
         </div>
       </div>
       <div className="controller__expensesDiv">
+        <Filter />
         <h2 className="controller__expensesDiv--h2">Gastos</h2>
         <ExpensesList />
       </div>
