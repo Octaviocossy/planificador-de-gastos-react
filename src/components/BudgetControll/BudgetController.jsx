@@ -4,6 +4,7 @@ import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
 import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
+import AlertContext from '../../context/AlertContext/alertContext';
 import ModalContext from '../../context/ModalContext/modalContext';
 import ModalOptions from '../ModalOptions/ModalOptions';
 import ExpensesList from '../ExpensesList/ExpensesList';
@@ -24,11 +25,14 @@ const BudgetController = () => {
     percentage,
   } = useContext(ExpenseContext);
   const { initialAmount } = useContext(BudgetContext);
+  const { alertFunction } = useContext(AlertContext);
   const { handleModalForm, modalForm, modalOptions } = useContext(ModalContext);
   useEffect(() => {
     addSpensed();
     amountAvailable(initialAmount);
     percentageSpensed(initialAmount);
+    if (!expensesList[0])
+      alertFunction('Agrega gastos, no tienes ninguno!', 'red');
   }, [expensesList]);
   const handleForm = () => {
     deleteEditExpense();
@@ -40,8 +44,8 @@ const BudgetController = () => {
         <div className="controller__div--left">
           <CircularProgressbar
             styles={buildStyles({
-              pathColor: '#66d2d6',
-              textColor: '#66d2d6',
+              pathColor: percentage < 100 ? '#66d2d6' : '#e56997',
+              textColor: percentage < 100 ? '#66d2d6' : '#e56997',
               textSize: '9px',
             })}
             text={`${percentage}% Gastado`}
@@ -53,18 +57,24 @@ const BudgetController = () => {
             <span>Presupuesto:</span> {quantityFormatter(initialAmount)}
           </p>
           <p>
-            <span>Disponible:</span> {quantityFormatter(available)}
-          </p>
-          <p>
             <span>Gastado:</span> {quantityFormatter(totalSpensed)}
+          </p>
+          <p
+            className={
+              available < 0 ? 'controller__div--right__available' : null
+            }
+          >
+            <span>Disponible:</span> {quantityFormatter(available)}
           </p>
         </div>
       </div>
-      <div className="controller__expensesDiv">
-        <Filter />
-        <h2 className="controller__expensesDiv--h2">Gastos</h2>
-        <ExpensesList />
-      </div>
+      {expensesList[0] && (
+        <div className="controller__expensesDiv">
+          <Filter />
+          <h2 className="controller__expensesDiv--h2">Gastos</h2>
+          <ExpensesList />
+        </div>
+      )}
       {!modalForm && !modalOptions ? (
         <div className="controller__modalDiv">
           <img

@@ -16,7 +16,8 @@ const ModalForm = () => {
     expensesList,
   } = useContext(ExpenseContext);
   const { handleModalForm } = useContext(ModalExpense);
-  const { showAlert, hideAlert, changeAnimation } = useContext(AlertContext);
+  const { hideAlert, changeAnimation, alertFunction } =
+    useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
     expense_name: '',
@@ -58,7 +59,7 @@ const ModalForm = () => {
           expense.expense_filter,
         ].includes('')
       ) {
-        showAlert('Todos los campos son obligatorios', 'red');
+        alertFunction('Todos los campos son obligatorios', 'red');
         changeAnimation(true);
         return;
       }

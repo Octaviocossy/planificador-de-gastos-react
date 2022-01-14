@@ -26,14 +26,22 @@ const AlertProvider = ({ children }) => {
       payload: animationState,
     });
   };
+  const alertFunction = (msg, type) => {
+    setTimeout(() => hideAlert(), 4500);
+    changeAnimation(true);
+    showAlert(msg, type);
+    setTimeout(() => {
+      changeAnimation(false);
+    }, 3000);
+  };
   return (
     <AlertContext.Provider
       value={{
-        alert: state.alert,
         animation: state.animation,
-        showAlert,
-        hideAlert,
+        alert: state.alert,
         changeAnimation,
+        alertFunction,
+        hideAlert,
       }}
     >
       {children}

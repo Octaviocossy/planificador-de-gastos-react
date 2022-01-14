@@ -5,13 +5,15 @@ import Types from '../../types/expenseTypes';
 
 const ExpenseProvider = ({ children }) => {
   const initialState = {
+    expensesFiltered: [],
     expensesList: localStorage.getItem('expenses')
       ? JSON.parse(localStorage.getItem('expenses'))
       : [],
     totalSpensed: 0,
-    available: 0,
     editExpense: null,
     percentage: 0,
+    available: 0,
+    filter: null,
   };
   const [state, dispatch] = useReducer(expenseReducer, initialState);
   const addExpense = (expense) => {
@@ -41,20 +43,26 @@ const ExpenseProvider = ({ children }) => {
   const saveExpenseLS = () => {
     localStorage.setItem('expenses', JSON.stringify(state.expensesList));
   };
+  const updateFilter = (type) => {
+    dispatch({ type: Types.FILTER, payload: type });
+  };
   return (
     <ExpenseContext.Provider
       value={{
+        expensesFiltered: state.expensesFiltered,
         editExpenseState: state.editExpense,
         totalSpensed: state.totalSpensed,
         expensesList: state.expensesList,
         percentage: state.percentage,
         available: state.available,
+        filter: state.filter,
         percentageSpensed,
         deleteEditExpense,
         amountAvailable,
         deleteExpense,
         saveExpenseLS,
         updateExpense,
+        updateFilter,
         editExpense,
         addExpense,
         addSpensed,

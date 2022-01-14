@@ -13,35 +13,31 @@
 }
 
 .alertDown {
-  @include onlyDesk {
-    animation-name: alertDown;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-    @keyframes alertDown {
-      0% {
-        transform: translateY(-150%);
-      }
-      100% {
-        transform: translateY(0%);
-        visibility: visible;
-      }
+  animation-name: alertDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  @keyframes alertDown {
+    0% {
+      transform: translateY(-150%);
+    }
+    100% {
+      transform: translateY(0%);
+      visibility: visible;
     }
   }
 }
 
 .alertUp {
-  @include onlyDesk {
-    animation-name: alertUp;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-    @keyframes alertUp {
-      0% {
-        transform: translateY(0%);
-      }
-      100% {
-        transform: translateY(-150%);
-        visibility: visible;
-      }
+  animation-name: alertUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  @keyframes alertUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-150%);
+      visibility: visible;
     }
   }
 }

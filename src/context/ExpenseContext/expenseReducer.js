@@ -52,6 +52,14 @@ const expenseReducer = (state, action) => {
           100
         ).toFixed(2),
       };
+    case Types.FILTER:
+      return {
+        ...state,
+        filter: action.payload,
+        expensesFiltered: state.expensesList.filter(
+          (expense) => expense.expense_filter === action.payload
+        ),
+      };
     default:
       return state;
   }
