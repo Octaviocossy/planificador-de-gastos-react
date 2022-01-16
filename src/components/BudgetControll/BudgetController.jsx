@@ -4,14 +4,14 @@ import { quantityFormatter } from '../../Helper';
 import addSpendingIcon from '../../img/nuevo-gasto.svg';
 import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import BudgetContext from '../../context/BudgetContext/budgetContext';
-import AlertContext from '../../context/AlertContext/alertContext';
 import ModalContext from '../../context/ModalContext/modalContext';
+import AlertContext from '../../context/AlertContext/alertContext';
 import ModalOptions from '../ModalOptions/ModalOptions';
 import ExpensesList from '../ExpensesList/ExpensesList';
-import ModalForm from '../ModalForm/ModalForm';
 import 'react-circular-progressbar/dist/styles.css';
-import './index.scss';
+import ModalForm from '../ModalForm/ModalForm';
 import Filter from '../Filter/Filter';
+import './index.scss';
 
 const BudgetController = () => {
   const {
@@ -23,20 +23,26 @@ const BudgetController = () => {
     deleteEditExpense,
     percentageSpensed,
     percentage,
+    cleanExpenses,
   } = useContext(ExpenseContext);
-  const { initialAmount } = useContext(BudgetContext);
-  const { alertFunction } = useContext(AlertContext);
+  const { initialAmount, updateBudget, resetBudget } =
+    useContext(BudgetContext);
   const { handleModalForm, modalForm, modalOptions } = useContext(ModalContext);
+  const { hideAlert } = useContext(AlertContext);
   useEffect(() => {
     addSpensed();
     amountAvailable(initialAmount);
     percentageSpensed(initialAmount);
-    if (!expensesList[0])
-      alertFunction('Agrega gastos, no tienes ninguno!', 'red');
   }, [expensesList]);
   const handleForm = () => {
     deleteEditExpense();
     handleModalForm();
+  };
+  const resetApp = () => {
+    updateBudget();
+    cleanExpenses();
+    resetBudget();
+    hideAlert();
   };
   return (
     <>
@@ -53,11 +59,15 @@ const BudgetController = () => {
           />
         </div>
         <div className="controller__div--right">
+          <button
+            type="button"
+            className="controller__div--right__btn"
+            onClick={resetApp}
+          >
+            Resetear Presupuesto
+          </button>
           <p>
             <span>Presupuesto:</span> {quantityFormatter(initialAmount)}
-          </p>
-          <p>
-            <span>Gastado:</span> {quantityFormatter(totalSpensed)}
           </p>
           <p
             className={
@@ -65,6 +75,9 @@ const BudgetController = () => {
             }
           >
             <span>Disponible:</span> {quantityFormatter(available)}
+          </p>
+          <p>
+            <span>Gastado:</span> {quantityFormatter(totalSpensed)}
           </p>
         </div>
       </div>
@@ -76,7 +89,13 @@ const BudgetController = () => {
         </div>
       )}
       {!modalForm && !modalOptions ? (
-        <div className="controller__modalDiv">
+        <div
+          className={
+            expensesList[0]
+              ? 'controller__modalDiv'
+              : 'controller__modalDiv--animated'
+          }
+        >
           <img
             className="controller__modalDiv--img"
             src={addSpendingIcon}

@@ -18,12 +18,21 @@ const BudgetProvider = ({ children }) => {
   const initialAmountLS = (amount) => {
     localStorage.setItem('budget', amount ?? 0);
   };
+  const updateBudget = () => {
+    dispatch({ type: Types.UPDATE_BUDGET });
+  };
+  const resetBudget = () => {
+    localStorage.removeItem('expenses');
+    localStorage.removeItem('budget');
+  };
   return (
     <BudgetContext.Provider
       value={{
         initialAmount: state.initialAmount,
         isValid: state.isValid,
         initialAmountLS,
+        updateBudget,
+        resetBudget,
         addBudget,
       }}
     >

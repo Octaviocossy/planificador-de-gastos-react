@@ -46,6 +46,9 @@ const ExpenseProvider = ({ children }) => {
   const updateFilter = (type) => {
     dispatch({ type: Types.FILTER, payload: type });
   };
+  const cleanExpenses = () => {
+    dispatch({ type: Types.CLEAN_EXPENSES });
+  };
   return (
     <ExpenseContext.Provider
       value={{
@@ -59,6 +62,7 @@ const ExpenseProvider = ({ children }) => {
         percentageSpensed,
         deleteEditExpense,
         amountAvailable,
+        cleanExpenses,
         deleteExpense,
         saveExpenseLS,
         updateExpense,

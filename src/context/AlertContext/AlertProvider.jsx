@@ -27,11 +27,11 @@ const AlertProvider = ({ children }) => {
     });
   };
   const alertFunction = (msg, type) => {
-    setTimeout(() => hideAlert(), 4500);
     changeAnimation(true);
     showAlert(msg, type);
     setTimeout(() => {
       changeAnimation(false);
+      setTimeout(() => hideAlert(), 700);
     }, 3000);
   };
   return (

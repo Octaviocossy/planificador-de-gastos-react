@@ -8,6 +8,12 @@ const budgetReducer = (state, action) => {
         initialAmount: action.payload,
         isValid: true,
       };
+    case Types.UPDATE_BUDGET:
+      return {
+        ...state,
+        isValid: false,
+        initialAmount: 0,
+      };
     default:
       return state;
   }

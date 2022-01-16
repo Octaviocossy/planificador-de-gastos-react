@@ -60,6 +60,12 @@ const expenseReducer = (state, action) => {
           (expense) => expense.expense_filter === action.payload
         ),
       };
+    case Types.CLEAN_EXPENSES:
+      return {
+        ...state,
+        expensesList: [],
+        expensesFiltered: [],
+      };
     default:
       return state;
   }

@@ -37,7 +37,6 @@ const ModalForm = () => {
   };
   const closeModal = () => {
     deleteEditExpense();
-    changeAnimation(false);
     setAnimation(false);
     setTimeout(() => {
       hideAlert();
@@ -49,7 +48,6 @@ const ModalForm = () => {
     if (expense.id) {
       expense.quantity = Number(expense.quantity);
       updateExpense(expense);
-      deleteEditExpense();
       closeModal();
     } else {
       if (

@@ -21,7 +21,7 @@
     background-color: #f4f4f4;
   }
   &--left {
-    max-width: 13rem;
+    max-width: 14rem;
     margin: auto;
     @include tablet {
       margin-bottom: 3rem;
@@ -33,8 +33,17 @@
     justify-content: center;
     margin: auto;
     font-size: 1.2rem;
+    &__btn {
+      @include btn($light, $hotpink);
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      @include tablet {
+        margin: 0 0 2rem 0;
+      }
+    }
     p {
       padding: 0.8rem 0;
+      color: $black;
       span {
         color: $cyan;
         font-weight: 700;
@@ -67,4 +76,24 @@
   right: 5%;
   bottom: 5%;
   cursor: pointer;
+}
+
+.controller__modalDiv--animated {
+  width: 3.5rem;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  cursor: pointer;
+  animation: bounce 1s infinite;
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
 }
