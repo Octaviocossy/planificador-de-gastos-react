@@ -40,6 +40,16 @@ const ModalForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (expense.id) {
+      if (
+        [
+          expense.expense_name,
+          expense.quantity,
+          expense.expense_filter,
+        ].includes('')
+      ) {
+        alertFunction('Todos los campos son obligatorios', 'red');
+        return;
+      }
       expense.quantity = Number(expense.quantity);
       updateExpense(expense);
       closeModal();
