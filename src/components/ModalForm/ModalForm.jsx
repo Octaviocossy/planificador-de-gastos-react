@@ -16,7 +16,7 @@ const ModalForm = () => {
     expensesList,
   } = useContext(ExpenseContext);
   const { handleModalForm } = useContext(ModalExpense);
-  const { hideAlert, alertFunction } = useContext(AlertContext);
+  const { alertFunction } = useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
     expense_name: '',
@@ -33,7 +33,6 @@ const ModalForm = () => {
     deleteEditExpense();
     setAnimation(false);
     setTimeout(() => {
-      hideAlert();
       handleModalForm();
     }, 500);
   };
