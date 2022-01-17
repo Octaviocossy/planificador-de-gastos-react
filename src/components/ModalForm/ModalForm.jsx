@@ -30,11 +30,11 @@ const ModalForm = () => {
     });
   };
   const closeModal = () => {
-    deleteEditExpense();
     setAnimation(false);
     setTimeout(() => {
       handleModalForm();
-    }, 500);
+      deleteEditExpense();
+    }, 800);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
