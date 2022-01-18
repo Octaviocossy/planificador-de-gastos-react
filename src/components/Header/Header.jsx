@@ -9,7 +9,7 @@ const Header = () => {
     <>
       {alert && <Alert />}
       <header>
-        <h1>Planificador de gastos</h1>
+        <h1>Planificador de Gastos</h1>
       </header>
     </>
   );
