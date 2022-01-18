@@ -3,7 +3,7 @@ import ModalExpense from '../../context/ModalContext/modalContext';
 import ExpenseContext from '../../context/ExpenseContext/expenseContext';
 import AlertContext from '../../context/AlertContext/alertContext';
 import button from '../../img/close.png';
-import { randomID, dateGenerator } from '../../Helper';
+import { randomID, dateGenerator, textVerificator } from '../../Helper';
 import './index.scss';
 
 const ModalForm = () => {
@@ -16,19 +16,13 @@ const ModalForm = () => {
     expensesList,
   } = useContext(ExpenseContext);
   const { handleModalForm } = useContext(ModalExpense);
-  const { hideAlert, changeAnimation, alertFunction } =
-    useContext(AlertContext);
+  const { alertFunction } = useContext(AlertContext);
   const [animation, setAnimation] = useState(true);
   const [expense, setExpense] = useState({
     expense_name: '',
     quantity: 0,
     expense_filter: '',
   });
-  useEffect(() => {
-    if (editExpenseState !== null) {
-      setExpense(editExpenseState);
-    }
-  }, []);
   const handleChange = (e) => {
     setExpense({
       ...expense,
@@ -36,16 +30,25 @@ const ModalForm = () => {
     });
   };
   const closeModal = () => {
-    deleteEditExpense();
     setAnimation(false);
     setTimeout(() => {
-      hideAlert();
       handleModalForm();
-    }, 500);
+      deleteEditExpense();
+    }, 800);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (expense.id) {
+      if (
+        [
+          expense.expense_name,
+          expense.quantity,
+          expense.expense_filter,
+        ].includes('')
+      ) {
+        alertFunction('Todos los campos son obligatorios', 'red');
+        return;
+      }
       expense.quantity = Number(expense.quantity);
       updateExpense(expense);
       closeModal();
@@ -58,16 +61,24 @@ const ModalForm = () => {
         ].includes('')
       ) {
         alertFunction('Todos los campos son obligatorios', 'red');
-        changeAnimation(true);
         return;
       }
-      closeModal();
-      expense.id = randomID();
-      expense.date = dateGenerator();
-      expense.quantity = Number(expense.quantity);
-      addExpense(expense);
+      if (textVerificator(expense.expense_name)) {
+        closeModal();
+        expense.id = randomID();
+        expense.date = dateGenerator();
+        expense.quantity = Number(expense.quantity);
+        addExpense(expense);
+      } else {
+        alertFunction('Utiliza palabras mas cortas!', 'red');
+      }
     }
   };
+  useEffect(() => {
+    if (editExpenseState !== null) {
+      setExpense(editExpenseState);
+    }
+  }, []);
   useEffect(() => {
     saveExpenseLS();
   }, [expensesList]);

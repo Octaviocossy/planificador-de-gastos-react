@@ -13,7 +13,7 @@ const ModalOptions = () => {
     setAnimation(false);
     setTimeout(() => {
       handleModalOptions();
-    }, 500);
+    }, 800);
   };
   const edit = () => {
     closeModal();
