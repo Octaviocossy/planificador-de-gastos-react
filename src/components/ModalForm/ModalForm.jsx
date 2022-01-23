@@ -49,6 +49,10 @@ const ModalForm = () => {
         alertFunction('Todos los campos son obligatorios', 'red');
         return;
       }
+      if (expense.quantity < 0) {
+        alertFunction('Solo se aceptan valores positivos', 'red');
+        return;
+      }
       expense.quantity = Number(expense.quantity);
       updateExpense(expense);
       closeModal();
@@ -61,6 +65,10 @@ const ModalForm = () => {
         ].includes('')
       ) {
         alertFunction('Todos los campos son obligatorios', 'red');
+        return;
+      }
+      if (expense.quantity < 0) {
+        alertFunction('Solo se aceptan valores positivos', 'red');
         return;
       }
       if (textVerificator(expense.expense_name)) {
