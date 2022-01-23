@@ -17,5 +17,9 @@ La aplicación nos permite setear un presupuesto, agregar gastos, editarlos y el
 
 ### Contacto 📞
 
-- [Twitter](https://twitter.com/Octaviocossy)  
-- [Telegram](https://xn--r1a.click/Octaviocossy)
+<a href="https://twitter.com/Octaviocossy">
+ <img alt="Octavio Cossy Torquati Twitter" width="30px" src="https://icongr.am/fontawesome/twitter.svg?size=128&color=70c8ff" />
+</a>
+<a href="https://xn--r1a.click/Octaviocossy">
+ <img alt="Octavio Cossy Torquati Telegram" width="30px" src="https://icongr.am/fontawesome/telegram.svg?size=128&color=70c8ff" />
+</a>
