@@ -15,11 +15,6 @@ La aplicación nos permite setear un presupuesto, agregar gastos, editarlos y el
 
 <center><img src="https://i.imgur.com/hOt66WH.png" width="800"/></center>
 
-### Contacto 📞
+---
 
-<a href="https://twitter.com/Octaviocossy">
- <img alt="Octavio Cossy Torquati Twitter" width="30px" src="https://icongr.am/fontawesome/twitter.svg?size=128&color=70c8ff" />
-</a>
-<a href="https://xn--r1a.click/Octaviocossy">
- <img alt="Octavio Cossy Torquati Telegram" width="30px" src="https://icongr.am/fontawesome/telegram.svg?size=128&color=70c8ff" />
-</a>
+[DEMO](https://planificador-de-gastos-react.vercel.app/)
